@@ -12,6 +12,7 @@ export default class NameChoiceWindow extends Component {
     constructor(props) {
         super(props);
         this.nameChoice = null;
+        this.saveName = this.saveName.bind(this);
     }
     
     saveName() {
@@ -22,7 +23,7 @@ export default class NameChoiceWindow extends Component {
         return (
             <div>
                 <input ref={(input) => { this.nameChoice = input; }} id="nameChoice" type="text" />
-                <button onClick={this.saveName.bind(this)}>Set name</button>
+                <button onClick={this.saveName}>Set name</button>
             </div>
         );
     }

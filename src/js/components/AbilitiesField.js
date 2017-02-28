@@ -27,19 +27,21 @@ class AbilitiesField extends Component {
     }
 
     render() {
+        const { abilityName } = this.props;
+
         return (
             <div class="row">
                 <div class="col-sm-7">
-                    {this.props.abilityName}
+                    {abilityName}
                 </div>
                 <div class="col-sm-3">
                     {this.getAbilityValue()}
                 </div>
                 <div class="col-sm-1">
-                    <ChangeAbilityLevel abilityName={this.props.abilityName} sign="+" />
+                    <ChangeAbilityLevel abilityName={abilityName} sign="+" />
                 </div>
                 <div class="col-sm-1">
-                    <ChangeAbilityLevel abilityName={this.props.abilityName} sign="-" />
+                    <ChangeAbilityLevel abilityName={abilityName} sign="-" />
                 </div>
             </div>
         );

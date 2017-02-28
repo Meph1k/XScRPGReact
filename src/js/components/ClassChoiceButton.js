@@ -11,17 +11,15 @@ import "../../styles/attributes.scss";
 export default class ClassChoiceButton extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            cssClass: 'attribute-choice-button'
-        }
+        this.saveClass = this.saveClass.bind(this);
     }
     
     getProperActiveElement() {
         if (this.props.classOfACharacter === this.props.lastStep.class) {
-            return this.state.cssClass = 'attribute-choice-button active-element';
+            return 'attribute-choice-button active-element';
         }
         
-        return this.state.cssClass = 'attribute-choice-button';
+        return 'attribute-choice-button';
     }
     
     saveClass() {
@@ -31,8 +29,10 @@ export default class ClassChoiceButton extends Component {
     }
 
     render() {
+        let cssClass = this.getProperActiveElement();
+
         return (
-            <button class={this.state.cssClass} onClick={this.saveClass.bind(this)}>
+            <button class={cssClass} onClick={this.saveClass}>
                 <span class="attribute-choice-button__text">{this.props.classOfACharacter}</span>
             </button>
         );

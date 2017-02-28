@@ -11,9 +11,7 @@ import "../../styles/attributes.scss";
 export default class GenderChoiceSquare extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            cssClass: 'col-sm-5 col-sm-offset-1 gender-choice-square'
-        }
+        this.chooseSex = this.chooseSex.bind(this);
     }
 
     getProperSymbol() {
@@ -26,10 +24,10 @@ export default class GenderChoiceSquare extends Component {
 
     getProperActiveElement() {
         if (this.props.sex === this.props.lastStep.gender) {
-            return this.state.cssClass = 'col-sm-5 col-sm-offset-1 gender-choice-square active-element';
+            return 'col-sm-5 col-sm-offset-1 gender-choice-square active-element';
         }
         
-        return this.state.cssClass = 'col-sm-5 col-sm-offset-1 gender-choice-square';
+        return 'col-sm-5 col-sm-offset-1 gender-choice-square';
     }
     
     chooseSex() {
@@ -39,9 +37,11 @@ export default class GenderChoiceSquare extends Component {
     }
 
     render() {
+        let cssClass = this.getProperActiveElement();
+        
         return (
-            <div class={this.state.cssClass}
-                 onClick={this.chooseSex.bind(this)}>{this.getProperSymbol()}
+            <div class={cssClass}
+                 onClick={this.chooseSex}>{this.getProperSymbol()}
             </div>
         );
     }

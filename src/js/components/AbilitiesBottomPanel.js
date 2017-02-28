@@ -9,6 +9,11 @@ import "../../styles/attributes.scss";
     };
 })
 export default class AbilitiesBottomPanel extends Component {
+    constructor(props) {
+        super(props);
+        this.reRollAbilities = this.reRollAbilities.bind(this);
+    }
+    
     saveAbilities() {
         return this.props.dispatch(saveAbilities(this.props.abilities));
     }
@@ -29,7 +34,7 @@ export default class AbilitiesBottomPanel extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.reRollAbilities.bind(this)}>REROLL</button>
+                <button onClick={this.reRollAbilities}>REROLL</button>
             </div>
         );
     }

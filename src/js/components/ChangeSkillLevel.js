@@ -10,6 +10,11 @@ import "../../styles/attributes.scss";
     };
 })
 export default class ChangeSkillLevel extends Component {
+    constructor(props) {
+        super(props);
+        this.changeSkillLevel = this.changeSkillLevel.bind(this);
+    }
+    
     changeSkillLevel() {
         if ('+' === this.props.sign && this.props.skillPoints > 0) {
             this.props.skills[this.props.skillName.toLowerCase()]++;
@@ -26,7 +31,7 @@ export default class ChangeSkillLevel extends Component {
     render() {
         return (
             <div>
-                <div class="change-ability-level" onClick={this.changeSkillLevel.bind(this)}>{this.props.sign}</div>
+                <div class="change-ability-level" onClick={this.changeSkillLevel}>{this.props.sign}</div>
             </div>
         );
     }

@@ -29,20 +29,18 @@ class AbilitiesField extends Component {
 
     render() {
         return (
-            <div>
-                <div class="row">
-                    <div class="col-sm-7">
-                        {this.props.abilityName}
-                    </div>
-                    <div class="col-sm-3">
-                        {this.getAbilityValue()}
-                    </div>
-                    <div class="col-sm-1">
-                        <ChangeAbilityLevel abilityName={this.props.abilityName} sign="+" />
-                    </div>
-                    <div class="col-sm-1">
-                        <ChangeAbilityLevel abilityName={this.props.abilityName} sign="-" />
-                    </div>
+            <div class="row">
+                <div class="col-sm-7">
+                    {this.props.abilityName}
+                </div>
+                <div class="col-sm-3">
+                    {this.getAbilityValue()}
+                </div>
+                <div class="col-sm-1">
+                    <ChangeAbilityLevel abilityName={this.props.abilityName} sign="+" />
+                </div>
+                <div class="col-sm-1">
+                    <ChangeAbilityLevel abilityName={this.props.abilityName} sign="-" />
                 </div>
             </div>
         );
@@ -55,4 +53,4 @@ const mapStateToProps = (store, ownProps) => {
     }
 };
 
-export default connect(mapStateToProps)(AbilitiesField)
+export default connect(mapStateToProps)(AbilitiesField);

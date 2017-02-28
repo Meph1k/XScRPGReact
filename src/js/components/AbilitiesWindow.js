@@ -3,8 +3,7 @@ import AbilitiesHeader from './AbilitiesHeader';
 import AbilitiesMiddleWindow from './AbilitiesMiddleWindow';
 import AbilitiesBottomPanel from './AbilitiesBottomPanel';
 import { connect } from "react-redux"
-
-require("../../styles/attributes.scss");
+import "../../styles/attributes.scss"
 
 @connect((store) => {
     return {

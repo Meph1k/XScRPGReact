@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { saveAlignment } from '../actions/nextStepCharAction';
+import { connect } from "react-redux"
 
 require("../../styles/attributes.scss");
 
+@connect((store) => {
+    return {
+        lastStep: store.nextStep
+    };
+})
 export default class AlignmentChoiceButton extends Component {
     saveAlignment() {
         return this.props.dispatch(saveAlignment(this.props.alignment));

@@ -4,6 +4,11 @@ import { connect } from "react-redux"
 
 require("../../styles/attributes.scss");
 
+@connect((store) => {
+    return {
+        lastStep: store.nextStep
+    };
+})
 export default class RaceChoiceButton extends Component {
     saveRace() {
         return this.props.dispatch(saveRace(this.props.race));

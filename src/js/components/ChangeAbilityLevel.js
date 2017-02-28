@@ -11,17 +11,13 @@ require("../../styles/attributes.scss");
     };
 })
 export default class ChangeAbilityLevel extends Component {
-    saveAbilities(abilities) {
-        return this.props.dispatch(saveAbilities(abilities));
-    }
-
     changeAbilityLevel() {
         if ('+' === this.props.sign && this.props.abilitiesPoints > 0) {
             this.props.abilities[this.props.abilityName.toLowerCase()]++;
             this.props.dispatch(saveAbilities(this.props.abilities));
             return this.props.dispatch(saveAbilitiesPoints(this.props.abilitiesPoints - 1));
         }
-        if ('-' === this.props.sign) {
+        if ('-' === this.props.sign && this.props.abilities[this.props.abilityName.toLowerCase()] > 0) {
             this.props.abilities[this.props.abilityName.toLowerCase()]--;
             this.props.dispatch(saveAbilities(this.props.abilities));
             return this.props.dispatch(saveAbilitiesPoints(this.props.abilitiesPoints + 1));

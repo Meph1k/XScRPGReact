@@ -4,6 +4,12 @@ export function saveLastStep(lastStepNumber) {
         payload: lastStepNumber
     }
 }
+export function saveName(name) {
+    return {
+        type: 'SAVE_NAME',
+        payload: name
+    }
+}
 export function saveGender(gender) {
     return {
         type: 'SAVE_GENDER',
@@ -34,9 +40,21 @@ export function saveAbilitiesPoints(abilitiesPoints) {
         payload: abilitiesPoints
     }
 }
+export function saveSkillPoints(skillPoints) {
+    return {
+        type: 'SAVE_SKILL_POINTS',
+        payload: skillPoints
+    }
+}
 export function saveAbilities(abilities) {
     return {
         type: 'SAVE_ABILITIES',
         payload: abilities
+    }
+}
+export function saveSkills(skills) {
+    return {
+        type: 'SAVE_SKILLS',
+        payload: skills
     }
 }

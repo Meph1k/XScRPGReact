@@ -15,7 +15,7 @@ export default class NameChoiceWindow extends Component {
     }
     
     saveName() {
-        return this.nameChoice === null ? 'unknown name' : this.props.dispatch(saveName(this.props.nameChoice));
+        return this.nameChoice === null ? 'unknown name' : this.props.dispatch(saveName(this.nameChoice.value));
     }
 
     render() {

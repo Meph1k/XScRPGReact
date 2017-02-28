@@ -19,7 +19,7 @@ export default class AllAttributesSummaryWindow extends Component {
             <div key={index}><Attribute attributeName={key} type="skill" /></div>);
     }
 
-    render() {
+    render() {console.log(this.props.lastStep);
         return (
             <div class="col-sm-6">
                 {this.showAbilities()}

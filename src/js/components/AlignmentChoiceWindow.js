@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {alignmentChoiceTitles} from '../constants/AttributeChoiceTitles';
+import { alignmentChoiceTitles } from '../constants/AttributeChoiceTitles';
 import AlignmentChoiceButton from './AlignmentChoiceButton';
 import { connect } from "react-redux"
 
-require("../../styles/attributes.scss");
+import "../../styles/attributes.scss";
 
 export default class AlignmentChoiceWindow extends Component {
     createAttrsWindow() {

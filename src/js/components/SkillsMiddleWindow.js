@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import SkillsField from './SkillsField';
-import {skillsChoiceTitles} from '../constants/AttributeChoiceTitles';
+import { skillsChoiceTitles } from '../constants/AttributeChoiceTitles';
 import { connect } from "react-redux"
-
-require("../../styles/attributes.scss");
+import "../../styles/attributes.scss";
 
 @connect((store) => {
     return {

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { saveRace } from '../actions/nextStepCharAction';
 import { connect } from "react-redux"
-
-require("../../styles/attributes.scss");
+import "../../styles/attributes.scss";
 
 @connect((store) => {
     return {

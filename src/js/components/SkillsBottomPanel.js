@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux"
 import { saveSkills } from '../actions/nextStepCharAction'
-
-require("../../styles/attributes.scss");
+import "../../styles/attributes.scss";
 
 @connect((store) => {
     return {

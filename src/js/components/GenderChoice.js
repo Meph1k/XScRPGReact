@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux"
 import GenderChoiceSquare from './GenderChoiceSquare';
-
-require("../../styles/attributes.scss");
+import "../../styles/attributes.scss";
 
 export default class GenderChoice extends Component {
 

@@ -1,6 +1,5 @@
 import React from 'react';
-
-require("../../styles/equipment.scss");
+import "../../styles/equipment.scss";
 
 export default class Item extends React.Component {
     render() {

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {classChoiceTitles} from '../constants/AttributeChoiceTitles';
+import { classChoiceTitles } from '../constants/AttributeChoiceTitles';
 import ClassChoiceButton from './ClassChoiceButton';
 import { connect } from "react-redux"
 
-require("../../styles/attributes.scss");
+import "../../styles/attributes.scss";
 
 export default class ClassChoiceWindow extends Component {
     createAttrsWindow() {

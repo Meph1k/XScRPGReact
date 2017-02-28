@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux"
 import { saveAbilities } from '../actions/nextStepCharAction';
 import ChangeAbilityLevel from './ChangeAbilityLevel';
-
-require("../../styles/attributes.scss");
+import "../../styles/attributes.scss";
 
 class AbilitiesField extends Component {
     constructor(props) {

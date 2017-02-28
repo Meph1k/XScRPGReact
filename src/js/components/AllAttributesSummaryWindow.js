@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Attribute from './Attribute';
 import { connect } from "react-redux"
-
-require("../../styles/attributes.scss");
+import "../../styles/attributes.scss";
 
 @connect((store) => {
     return {

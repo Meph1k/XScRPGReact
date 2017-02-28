@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import AttributeChoiceButton from './AttributeChoiceButton';
-import {attributeChoiceTitles} from '../constants/AttributeChoiceTitles';
+import { attributeChoiceTitles } from '../constants/AttributeChoiceTitles';
 import ResetAndAccept from './ResetAndAccept';
 import { connect } from "react-redux"
-
-require("../../styles/attributes.scss");
+import "../../styles/attributes.scss";
 
 @connect((store) => {
     return {

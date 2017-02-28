@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { saveName } from '../actions/nextStepCharAction';
 import { connect } from "react-redux"
-
-require("../../styles/attributes.scss");
+import "../../styles/attributes.scss";
 
 @connect((store) => {
     return {
@@ -14,6 +13,7 @@ export default class NameChoiceWindow extends Component {
         super(props);
         this.nameChoice = null;
     }
+    
     saveName() {
         return this.nameChoice === null ? 'unknown name' : this.props.dispatch(saveName(this.props.nameChoice));
     }

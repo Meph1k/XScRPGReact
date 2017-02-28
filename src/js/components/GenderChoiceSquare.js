@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux"
 import { saveGender } from '../actions/nextStepCharAction';
-
-require("../../styles/attributes.scss");
+import "../../styles/attributes.scss";
 
 @connect((store) => {
     return {
@@ -21,6 +20,7 @@ export default class GenderChoiceSquare extends Component {
         if ('female' === this.props.sex) {
             return '♀';
         }
+        
         return '♂';
     }
 
@@ -28,6 +28,7 @@ export default class GenderChoiceSquare extends Component {
         if (this.props.sex === this.props.lastStep.gender) {
             return this.state.cssClass = 'col-sm-5 col-sm-offset-1 gender-choice-square active-element';
         }
+        
         return this.state.cssClass = 'col-sm-5 col-sm-offset-1 gender-choice-square';
     }
     
@@ -40,7 +41,8 @@ export default class GenderChoiceSquare extends Component {
     render() {
         return (
             <div class={this.state.cssClass}
-                 onClick={this.chooseSex.bind(this)}>{this.getProperSymbol()}</div>
+                 onClick={this.chooseSex.bind(this)}>{this.getProperSymbol()}
+            </div>
         );
     }
 }

@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux"
 import { saveSkills } from '../actions/nextStepCharAction';
 import ChangeSkillLevel from './ChangeSkillLevel';
-
-require("../../styles/attributes.scss");
+import "../../styles/attributes.scss";
 
 class SkillsField extends Component {
     constructor(props) {

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { saveLastStep } from '../actions/nextStepCharAction';
-import { connect } from "react-redux"
-
-require("../../styles/attributes.scss");
+import { connect } from "react-redux";
+import "../../styles/attributes.scss";
 
 @connect((store) => {
     return {
@@ -10,7 +9,6 @@ require("../../styles/attributes.scss");
     };
 })
 export default class AttributeChoiceButton extends Component {
-
     saveLastStep() {
         return this.props.dispatch(saveLastStep(this.props.step + 1));
     }

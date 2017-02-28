@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import RaceChoiceButton from './RaceChoiceButton';
-import {raceChoiceTitles} from '../constants/AttributeChoiceTitles';
+import { raceChoiceTitles } from '../constants/AttributeChoiceTitles';
 import { connect } from "react-redux"
-
-require("../../styles/attributes.scss");
+import "../../styles/attributes.scss";
 
 @connect((store) => {
     return {

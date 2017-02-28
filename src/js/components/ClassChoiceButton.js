@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { saveClass } from '../actions/nextStepCharAction';
 import { connect } from "react-redux"
-
-require("../../styles/attributes.scss");
+import "../../styles/attributes.scss";
 
 @connect((store) => {
     return {
@@ -21,6 +20,7 @@ export default class ClassChoiceButton extends Component {
         if (this.props.classOfACharacter === this.props.lastStep.class) {
             return this.state.cssClass = 'attribute-choice-button active-element';
         }
+        
         return this.state.cssClass = 'attribute-choice-button';
     }
     

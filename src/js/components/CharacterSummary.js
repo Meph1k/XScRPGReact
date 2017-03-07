@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import AllAttributesSummaryWindow from './AllAttributesSummaryWindow';
+import { connect } from "react-redux"
 
-export default class CharacterSummary extends Component {
-
-    render() {
-        return (
-            <div class="container additional-margin-top--less">
-                <div class="row">
-                    <AllAttributesSummaryWindow />
-                </div>
+const CharacterSummary = () => {
+    return (
+        <div class="container additional-margin-top--less">
+            <div class="row">
+                <AllAttributesSummaryWindow />
             </div>
-        );
+        </div>
+    );
+};
+
+const mapStateToProps = (store) => {
+    return {
+        lastStep: {...store.nextStep}
     }
-}
+};
+
+export default connect(mapStateToProps)(CharacterSummary);

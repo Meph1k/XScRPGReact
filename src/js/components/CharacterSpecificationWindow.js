@@ -8,42 +8,28 @@ import NameChoiceWindow from './NameChoiceWindow';
 import SkillsWindow from './SkillsWindow';
 import { connect } from "react-redux"
 
-@connect((store) => {
+const CharacterSpecificationWindow = ({lastStep}) => {
+    return (
+        <div class="container additional-margin-top--less">
+            <div class="row">
+                {getProperWindow(lastStep)}
+            </div>
+        </div>
+    );
+};
+
+const getProperWindow = (lastStep) => {
+    let tempStep = lastStep - 1;
+    const components = [<GenderChoice />, <RaceChoiceWindow />, <ClassChoiceWindow />, <AlignmentChoiceWindow />,
+        <AbilitiesWindow />, <SkillsWindow />, <NameChoiceWindow />];
+  
+    return components[tempStep];
+};
+
+const mapStateToProps = (store) => {
     return {
         lastStep: store.nextStep.lastStep
     };
-})
-export default class CharacterSpecificationWindow extends Component {
-    componentWillMount() {
-        this.lastStep = this.lastStep || 0;
-    }
+};
 
-    getProperWindow() {
-        let tempStep = this.props.lastStep - 1;
-        if (0 === tempStep) {
-            return (<GenderChoice />);
-        } else if (1 === tempStep) {
-            return (<RaceChoiceWindow />);
-        } else if (2 === tempStep) {
-            return (<ClassChoiceWindow />);
-        } else if (3 === tempStep) {
-            return (<AlignmentChoiceWindow />);
-        } else if (4 === tempStep) {
-            return (<AbilitiesWindow />);
-        } else if (5 === tempStep) {
-            return (<SkillsWindow />);
-        } else if (6 === tempStep) {
-            return (<NameChoiceWindow />);
-        }
-    }
-
-    render() {
-        return (
-            <div class="container additional-margin-top--less">
-                <div class="row">
-                    {this.getProperWindow()}
-                </div>
-            </div>
-        );
-    }
-}
+export default connect(mapStateToProps)(CharacterSpecificationWindow);

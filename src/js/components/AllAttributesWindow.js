@@ -5,22 +5,23 @@ import ResetAndAccept from './ResetAndAccept';
 import { connect } from "react-redux"
 import "../../styles/attributes.scss";
 
-@connect((store) => {
+const AllAttributesWindow = () => {
+    return (
+        <div class="col-sm-6">
+            <div class="all-attrs-window">{createAttrsWindow()}</div>
+            <ResetAndAccept />
+        </div>
+    );
+};
+
+const createAttrsWindow = () => {
+    return attributeChoiceTitles.map((i, index) => <div key={index}><AttributeChoiceButton step={index} buttonTitle={i} /></div>)
+};
+
+const mapStateToProps = (store) => {
     return {
         lastStep: store.nextStep
-    };
-})
-export default class AllAttributesWindow extends Component {
-    createAttrsWindow() {
-        return attributeChoiceTitles.map((i, index) => <div key={index}><AttributeChoiceButton step={index} buttonTitle={i} /></div>)
     }
+};
 
-    render() {
-        return (
-            <div class="col-sm-6">
-                <div class="all-attrs-window">{this.createAttrsWindow()}</div>
-                <ResetAndAccept />
-            </div>
-        );
-    }
-}
+export default connect(mapStateToProps)(AllAttributesWindow);

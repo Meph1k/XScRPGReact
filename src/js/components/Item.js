@@ -1,11 +1,11 @@
 import React from 'react';
+import { connect } from "react-redux"
 import "../../styles/equipment.scss";
 
-export default class Item extends React.Component {
-    render() {
-        return (
-            <div class={this.props.className}>♘</div>
-        );
-    }
-}
+const Item = (props) => {
+    return (
+        <div class={props.className}>♘</div>
+    );
+};
 
+export default connect()(Item);

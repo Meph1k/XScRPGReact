@@ -1,55 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux"
-import { saveSkills } from '../actions/nextStepCharAction';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from '../actions/nextStepCharAction';
 import ChangeSkillLevel from './ChangeSkillLevel';
 import "../../styles/attributes.scss";
 
-class SkillsField extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    saveSkills(skills) {
-        return this.props.dispatch(saveSkills(skills));
-    }
-
-    getRandomInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) + min);
-    }
-
-    componentWillMount() {
-        this.props.skills[this.props.skillName.toLowerCase()] = this.getRandomInt(0, 3);
-        this.saveSkills(this.props.skills);
-    }
-
-    getSkillValue() {
-        return this.props.skills[this.props.skillName.toLowerCase()];
-    }
-
-    render() {
-        return (
-            <div class="row">
-                <div class="col-sm-7">
-                    {this.props.skillName}
-                </div>
-                <div class="col-sm-3">
-                    {this.getSkillValue()}
-                </div>
-                <div class="col-sm-1">
-                    <ChangeSkillLevel skillName={this.props.skillName} sign="+" />
-                </div>
-                <div class="col-sm-1">
-                    <ChangeSkillLevel skillName={this.props.skillName} sign="-" />
-                </div>
+const SkillsField = (props) => {
+    return (
+        <div class="row">
+            <div class="col-sm-7">
+                {props.skillName}
             </div>
-        );
-    }
-}
-const mapStateToProps = (store, ownProps) => {
+            <div class="col-sm-3">
+                {getSkillValue(props)}
+            </div>
+            <div class="col-sm-1">
+                <ChangeSkillLevel skillName={props.skillName} sign="+" />
+            </div>
+            <div class="col-sm-1">
+                <ChangeSkillLevel skillName={props.skillName} sign="-" />
+            </div>
+        </div>
+    );
+};
+
+const getSkillValue = (props) => {
+    return Object.values(props.skills)[props.skillNumber];
+};
+
+const mapStateToProps = (store) => {
 
     return {
         skills: {...store.nextStep.skills}
     }
 };
 
-export default connect(mapStateToProps)(SkillsField);
+const mapDispatchToProps = (dispatch) => {
+    return { actions: bindActionCreators(actionCreators, dispatch) }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SkillsField);

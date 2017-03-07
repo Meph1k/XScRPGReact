@@ -1,40 +1,41 @@
 import React, { Component } from 'react';
-import { saveClass } from '../actions/nextStepCharAction';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from '../actions/nextStepCharAction';
 import { connect } from "react-redux"
 import "../../styles/attributes.scss";
 
-@connect((store) => {
+const ClassChoiceButton = (props) => {
+    let cssClass = getProperActiveElement(props);
+
+    return (
+        <button class={cssClass} onClick={() => saveClass(props)}>
+            <span class="attribute-choice-button__text">{props.classOfACharacter}</span>
+        </button>
+    );
+};
+
+const getProperActiveElement = (props) => {
+    if (props.classOfACharacter === props.lastStep.class) {
+        return 'attribute-choice-button active-element';
+    }
+
+    return 'attribute-choice-button';
+};
+
+const saveClass = (props) => {
+    props.actions.saveClass(props.classOfACharacter);
+
+    return getProperActiveElement(props);
+};
+
+const mapStateToProps = (store) => {
     return {
         lastStep: store.nextStep
     };
-})
-export default class ClassChoiceButton extends Component {
-    constructor(props) {
-        super(props);
-        this.saveClass = this.saveClass.bind(this);
-    }
-    
-    getProperActiveElement() {
-        if (this.props.classOfACharacter === this.props.lastStep.class) {
-            return 'attribute-choice-button active-element';
-        }
-        
-        return 'attribute-choice-button';
-    }
-    
-    saveClass() {
-        this.props.dispatch(saveClass(this.props.classOfACharacter));
+};
 
-        return this.getProperActiveElement();
-    }
+const mapDispatchToProps = (dispatch) => {
+    return { actions: bindActionCreators(actionCreators, dispatch) }
+};
 
-    render() {
-        let cssClass = this.getProperActiveElement();
-
-        return (
-            <button class={cssClass} onClick={this.saveClass}>
-                <span class="attribute-choice-button__text">{this.props.classOfACharacter}</span>
-            </button>
-        );
-    }
-}
+export default connect(mapStateToProps, mapDispatchToProps)(ClassChoiceButton);

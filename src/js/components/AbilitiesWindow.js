@@ -2,23 +2,24 @@ import React, { Component } from 'react';
 import AbilitiesHeader from './AbilitiesHeader';
 import AbilitiesMiddleWindow from './AbilitiesMiddleWindow';
 import AbilitiesBottomPanel from './AbilitiesBottomPanel';
-import { connect } from "react-redux"
-import "../../styles/attributes.scss"
+import { bindActionCreators } from 'redux';
+import { connect } from "react-redux";
+import "../../styles/attributes.scss";
 
-@connect((store) => {
+const AbilitiesWindow = () => {
+    return (
+        <div class="col-sm-6">
+            <AbilitiesHeader />
+            <AbilitiesMiddleWindow />
+            <AbilitiesBottomPanel />
+        </div>
+    );
+};
+
+const mapStateToProps = (store) => {
     return {
-        abilities: store.nextStep.abilities
-    };
-})
-export default class AbilitiesWindow extends Component {
-
-    render() {
-        return (
-            <div class="col-sm-6">
-                <AbilitiesHeader />
-                <AbilitiesMiddleWindow />
-                <AbilitiesBottomPanel />
-            </div>
-        );
+        abilities: {...store.nextStep.abilities}
     }
-}
+};
+
+export default connect(mapStateToProps)(AbilitiesWindow);

@@ -1,30 +1,26 @@
 import React, { Component } from 'react';
-import { saveName } from '../actions/nextStepCharAction';
 import { connect } from "react-redux"
+import { bindActionCreators } from 'redux';
+import * as actionCreators from '../actions/nextStepCharAction';
 import "../../styles/attributes.scss";
 
-@connect((store) => {
-    return {
-        lastStep: store.nextStep
-    };
-})
-export default class NameChoiceWindow extends Component {
-    constructor(props) {
-        super(props);
-        this.nameChoice = null;
-        this.saveName = this.saveName.bind(this);
-    }
-    
-    saveName() {
-        return this.nameChoice === null ? 'unknown name' : this.props.dispatch(saveName(this.nameChoice.value));
-    }
+const NameChoiceWindow = (props) => {
+    return (
+        <div>
+            <input id="nameChoice" type="text" />
+            <button onClick={() => saveNameToStore(props)}>Set name</button>
+        </div>
+    );
+};
 
-    render() {
-        return (
-            <div>
-                <input ref={(input) => { this.nameChoice = input; }} id="nameChoice" type="text" />
-                <button onClick={this.saveName}>Set name</button>
-            </div>
-        );
-    }
-}
+const saveNameToStore = (props) => {
+    let customName = document.querySelector('#nameChoice').value;
+
+    return props.actions.saveName(customName);
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return { actions: bindActionCreators(actionCreators, dispatch) }
+};
+
+export default connect(null, mapDispatchToProps)(NameChoiceWindow);

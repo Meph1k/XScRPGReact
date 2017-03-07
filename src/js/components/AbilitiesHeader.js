@@ -2,16 +2,10 @@ import React, { Component } from 'react';
 import { connect } from "react-redux"
 import "../../styles/attributes.scss";
 
-@connect((store) => {
-    return {
-        abilitiesPoints: store.abilitiesPoints
-    };
-})
-export default class AbilitiesHeader extends Component {
+const AbilitiesHeader = () => {
+    return (
+        <div class="abilities-header"></div>
+    );
+};
 
-    render() {
-        return (
-            <div class="abilities-header"></div>
-        );
-    }
-}
+export default connect()(AbilitiesHeader);

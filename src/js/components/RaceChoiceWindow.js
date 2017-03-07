@@ -4,20 +4,14 @@ import { raceChoiceTitles } from '../constants/AttributeChoiceTitles';
 import { connect } from "react-redux"
 import "../../styles/attributes.scss";
 
-@connect((store) => {
-    return {
-        lastStep: store.nextStep,
-        gender: store.gender
-    };
-})
-export default class RaceChoiceWindow extends Component {
-    createAttrsWindow() {
-        return raceChoiceTitles.map((i, index) => <div key={index}><RaceChoiceButton race={i} /></div>)
-    }
+const RaceChoiceWindow = () => {
+    return (
+        <div class="col-sm-6"><div class="all-attrs-window">{createAttrsWindow()}</div></div>
+    );
+};
 
-    render() {
-        return (
-            <div class="col-sm-6"><div class="all-attrs-window">{this.createAttrsWindow()}</div></div>
-        );
-    }
-}
+const createAttrsWindow = () => {
+    return raceChoiceTitles.map((i) => <div key={i}><RaceChoiceButton race={i} /></div>)
+};
+
+export default connect()(RaceChoiceWindow);

@@ -1,38 +1,39 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux"
-import { saveSkillPoints, saveSkills } from '../actions/nextStepCharAction';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from '../actions/nextStepCharAction';
 import "../../styles/attributes.scss";
 
-@connect((store) => {
+const ChangeSkillLevel = (props) => {
+    return (
+        <div>
+            <div class="change-ability-level" onClick={() => changeSkillLevel(props)}>{props.sign}</div>
+        </div>
+    );
+};
+
+const changeSkillLevel = (props) => {
+    if ('+' === props.sign && props.skillPoints > 0) {
+        props.skills[props.skillName.toLowerCase()]++;
+        props.actions.saveSkills(props.skills);
+        return props.actions.saveSkillPoints(props.skillPoints - 1);
+    }
+    if ('-' === props.sign && props.skills[props.skillName.toLowerCase()] > 0) {
+        props.skills[props.skillName.toLowerCase()]--;
+        props.actions.saveSkills(props.skills);
+        return props.actions.saveSkillPoints(props.skillPoints + 1);
+    }
+};
+
+const mapStateToProps = (store) => {
     return {
         skills: store.nextStep.skills,
         skillPoints: store.nextStep.skillPoints
     };
-})
-export default class ChangeSkillLevel extends Component {
-    constructor(props) {
-        super(props);
-        this.changeSkillLevel = this.changeSkillLevel.bind(this);
-    }
-    
-    changeSkillLevel() {
-        if ('+' === this.props.sign && this.props.skillPoints > 0) {
-            this.props.skills[this.props.skillName.toLowerCase()]++;
-            this.props.dispatch(saveSkills(this.props.skills));
-            return this.props.dispatch(saveSkillPoints(this.props.skillPoints - 1));
-        }
-        if ('-' === this.props.sign && this.props.skills[this.props.skillName.toLowerCase()] > 0) {
-            this.props.skills[this.props.skillName.toLowerCase()]--;
-            this.props.dispatch(saveSkills(this.props.skills));
-            return this.props.dispatch(saveSkillPoints(this.props.skillPoints + 1));
-        }
-    }
+};
 
-    render() {
-        return (
-            <div>
-                <div class="change-ability-level" onClick={this.changeSkillLevel}>{this.props.sign}</div>
-            </div>
-        );
-    }
-}
+const mapDispatchToProps = (dispatch) => {
+    return { actions: bindActionCreators(actionCreators, dispatch) }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChangeSkillLevel);

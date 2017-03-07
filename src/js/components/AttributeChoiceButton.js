@@ -1,34 +1,35 @@
 import React, { Component } from 'react';
-import { saveLastStep } from '../actions/nextStepCharAction';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from '../actions/nextStepCharAction';
 import { connect } from "react-redux";
 import "../../styles/attributes.scss";
 
-@connect((store) => {
+const AttributeChoiceButton = ({actions, lastStep, step, buttonTitle}) => {
+    return (
+        <div>
+            {lastStep !== step ? (
+                <button class="attribute-choice-button" disabled>
+                    <span class="attribute-choice-button__text">{buttonTitle}</span>
+                </button>) :
+                <button class="attribute-choice-button" onClick={() => saveLastStep(actions, step)}>
+                    <span class="attribute-choice-button__text">{buttonTitle}</span>
+                </button>}
+        </div>
+    )
+};
+
+const saveLastStep = (actions, step) => {
+    return actions.saveLastStep(step + 1);
+};
+
+const mapStateToProps = (store) => {
     return {
         lastStep: store.nextStep.lastStep
-    };
-})
-export default class AttributeChoiceButton extends Component {
-    constructor(props) {
-        super(props);
-        this.saveLastStep = this.saveLastStep.bind(this);
     }
-    
-    saveLastStep() {
-        return this.props.dispatch(saveLastStep(this.props.step + 1));
-    }
+};
 
-    render() {
-        return (
-            <div>
-                {this.props.lastStep !== this.props.step ? (
-                    <button class="attribute-choice-button" disabled>
-                        <span class="attribute-choice-button__text">{this.props.buttonTitle}</span>
-                    </button>) :
-                    <button class="attribute-choice-button" onClick={this.saveLastStep}>
-                        <span class="attribute-choice-button__text">{this.props.buttonTitle}</span>
-                    </button>}
-            </div>
-        )
-    }
-}
+const mapDispatchToProps = (dispatch) => {
+    return { actions: bindActionCreators(actionCreators, dispatch) }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AttributeChoiceButton);

@@ -1,12 +1,11 @@
 import React from "react"
 import { connect } from "react-redux"
 
-export default class Layout extends React.Component {
-
-  render() {
+const Layout = (props) => {
     return (
         <div>
-          {this.props.children}
+          {props.children}
         </div>)
-  }
-}
+};
+
+export default connect()(Layout);

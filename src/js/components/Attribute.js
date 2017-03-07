@@ -2,26 +2,27 @@ import React, { Component } from 'react';
 import { connect } from "react-redux"
 import "../../styles/attributes.scss";
 
-@connect((store) => {
+const Attribute = (props) => {
+    return (
+        <div>
+            {'ability' === props.type ? (
+            <div>
+                {props.attributeName}:
+                {props.lastStep.abilities[props.attributeName.toLowerCase()]}
+            </div>) : (
+            <div>
+                {props.attributeName}:
+                {Object.values(props.lastStep.skills)[props.skillNumber]}
+            </div>)
+            }
+        </div>
+    )
+};
+
+const mapStateToProps = (store) => {
     return {
         lastStep: store.nextStep
-    };
-})
-export default class Attribute extends Component {
-    render() {
-        return (
-            <div>
-                {'ability' === this.props.type ? (
-                <div>
-                    {this.props.attributeName}:
-                    {this.props.lastStep.abilities[this.props.attributeName.toLowerCase()]}
-                </div>) : (
-                <div>
-                    {this.props.attributeName}:
-                    {this.props.lastStep.skills[this.props.attributeName.toLowerCase()]}
-                </div>)
-                }
-            </div>
-        )
     }
-}
+};
+
+export default connect(mapStateToProps)(Attribute);

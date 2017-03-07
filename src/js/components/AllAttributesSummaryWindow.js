@@ -3,33 +3,34 @@ import Attribute from './Attribute';
 import { connect } from "react-redux"
 import "../../styles/attributes.scss";
 
-@connect((store) => {
+const AllAttributesSummaryWindow = ({lastStep}) => {
+    return (
+        <div class="col-sm-6">
+            {showAbilities(lastStep)}
+            {lastStep.alignment}
+            {lastStep.class}
+            {lastStep.gender}
+            {lastStep.race}
+            {showSkills(lastStep)}
+            {lastStep.name}
+        </div>
+    );
+};
+
+const showAbilities = (lastStep) => {
+    return Object.keys(lastStep.abilities).map((key, index) =>
+        <div key={key}><Attribute attributeName={key} type="ability" /></div>);
+};
+
+const showSkills = (lastStep) => {
+    return Object.keys(lastStep.skills).map((key, index) =>
+        <div key={key}><Attribute attributeName={key} type="skill" skillNumber={index} /></div>);
+};
+
+const mapStateToProps = (store) => {
     return {
-        lastStep: store.nextStep
-    };
-})
-export default class AllAttributesSummaryWindow extends Component {
-    showAbilities() {
-        return Object.keys(this.props.lastStep.abilities).map((key, index, value) =>
-            <div key={index}><Attribute attributeName={key} type="ability" /></div>);
+        lastStep: {...store.nextStep}
     }
+};
 
-    showSkills() {
-        return Object.keys(this.props.lastStep.skills).map((key, index, value) =>
-            <div key={index}><Attribute attributeName={key} type="skill" /></div>);
-    }
-
-    render() {
-        return (
-            <div class="col-sm-6">
-                {this.showAbilities()}
-                {this.props.lastStep.alignment}
-                {this.props.lastStep.class}
-                {this.props.lastStep.gender}
-                {this.props.lastStep.race}
-                {this.showSkills()}
-                {this.props.lastStep.name}
-            </div>
-        );
-    }
-}
+export default connect(mapStateToProps)(AllAttributesSummaryWindow);

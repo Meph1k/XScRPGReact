@@ -5,22 +5,26 @@ import * as actionCreators from '../actions/nextStepCharAction';
 import "../../styles/attributes.scss";
 
 const ChangeSkillLevel = (props) => {
+    const onButtonClick = (props) => (event) => changeSkillLevelFunction(props);
+    
     return (
         <div>
-            <div class="change-ability-level" onClick={() => changeSkillLevel(props)}>{props.sign}</div>
+            <div class="change-ability-level" onClick={onButtonClick(props)}>{props.sign}</div>
         </div>
     );
 };
 
-const changeSkillLevel = (props) => {
+const changeSkillLevelFunction = (props) => {
     if ('+' === props.sign && props.skillPoints > 0) {
-        props.skills[props.skillName.toLowerCase()]++;
+        Object.values(props.skills)[props.skillNumber]++;
         props.actions.saveSkills(props.skills);
+        
         return props.actions.saveSkillPoints(props.skillPoints - 1);
     }
-    if ('-' === props.sign && props.skills[props.skillName.toLowerCase()] > 0) {
-        props.skills[props.skillName.toLowerCase()]--;
+    if ('-' === props.sign && Object.values(props.skills)[props.skillNumber] > 0) {
+        Object.values(props.skills)[props.skillNumber]--;
         props.actions.saveSkills(props.skills);
+        
         return props.actions.saveSkillPoints(props.skillPoints + 1);
     }
 };

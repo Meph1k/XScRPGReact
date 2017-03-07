@@ -6,10 +6,11 @@ import "../../styles/attributes.scss";
 
 const GenderChoiceSquare = (props) => {
     let cssClass = getProperActiveElement(props);
+    const onButtonClick = (props) => (event) => chooseSex(props);
     
     return (
         <div class={cssClass}
-             onClick={() => chooseSex(props)}>{getProperSymbol(props.sex)}
+             onClick={onButtonClick(props)}>{getProperSymbol(props.sex)}
         </div>
     );
 };

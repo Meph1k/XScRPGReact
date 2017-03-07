@@ -5,13 +5,15 @@ import { connect } from "react-redux";
 import "../../styles/attributes.scss";
 
 const AttributeChoiceButton = ({actions, lastStep, step, buttonTitle}) => {
+    const onButtonClick = (step, actions) => (event) => saveLastStep(actions, step);
+    
     return (
         <div>
             {lastStep !== step ? (
                 <button class="attribute-choice-button" disabled>
                     <span class="attribute-choice-button__text">{buttonTitle}</span>
                 </button>) :
-                <button class="attribute-choice-button" onClick={() => saveLastStep(actions, step)}>
+                <button class="attribute-choice-button" onClick={onButtonClick(step, actions)}>
                     <span class="attribute-choice-button__text">{buttonTitle}</span>
                 </button>}
         </div>

@@ -5,10 +5,12 @@ import * as actionCreators from '../actions/nextStepCharAction';
 import "../../styles/attributes.scss";
 
 const NameChoiceWindow = (props) => {
+    const onButtonClick = (props) => (event) => saveNameToStore(props);
+    
     return (
         <div>
             <input id="nameChoice" type="text" />
-            <button onClick={() => saveNameToStore(props)}>Set name</button>
+            <button onClick={onButtonClick(props)}>Set name</button>
         </div>
     );
 };

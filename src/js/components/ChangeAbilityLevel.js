@@ -5,17 +5,18 @@ import * as actionCreators from '../actions/nextStepCharAction';
 import "../../styles/attributes.scss";
 
 const ChangeAbilityLevel = (props) => {
+    const onButtonClick = (props) => (event) => changeAbilityLevel(props);
+    
     return (
         <div>
-            <div class="change-ability-level" onClick={() => 
-                changeAbilityLevel(props)}>{props.sign}
+            <div class="change-ability-level" onClick={onButtonClick(props)}>{props.sign}
             </div>
         </div>
     );
 };
 
 const saveAbilitiesPoints = (props) => {
-    return props.actions.saveAbilitiesPoints('-' === props.sign ? props.abilitiesPoints - 1 : props.abilitiesPoints + 1);
+    return props.actions.saveAbilitiesPoints('-' === props.sign ? props.abilitiesPoints + 1 : props.abilitiesPoints - 1);
 };
 
 const changeAbilityLevel = (props) => {

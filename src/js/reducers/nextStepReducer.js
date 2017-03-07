@@ -46,10 +46,16 @@ export default function reducer(state={
             return {...state, abilitiesPoints: action.payload}
         }
         case "SAVE_ABILITIES": {
-            return {...state, abilities: action.payload}
+            if (action.payload) {
+                return {...state, abilities: action.payload}
+            }
+            return reRollAbilities(state);
         }
         case "SAVE_SKILLS": {
-            return {...state, skills: action.payload}
+            if (action.payload) {
+                return {...state, skills: action.payload}
+            }
+            return reRollSkills(state);
         }
         case "SAVE_SKILL_POINTS": {
             return {...state, skillPoints: action.payload}
@@ -58,3 +64,25 @@ export default function reducer(state={
 
     return state;
 }
+
+const reRollSkills = (state) => {
+    for(let key in state.skills) {
+        if(state.skills.hasOwnProperty(key)) {
+            state.skills[key] = getRandomInt(0, 3);
+        }
+    }
+    return {...state, skills: state.skills}
+};
+
+const reRollAbilities = (state) => {
+    for (let key in state.abilities) {
+        if (state.abilities.hasOwnProperty(key)) {
+            state.abilities[key] = getRandomInt(9, 19);
+        }
+    }
+    return {...state, abilities: state.abilities}
+};
+
+const getRandomInt = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+};

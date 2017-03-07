@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux"
 import ChangeAbilityLevel from './ChangeAbilityLevel';
-import { bindActionCreators } from 'redux';
-import * as actionCreators from '../actions/nextStepCharAction';
 import "../../styles/attributes.scss";
 
 const AbilitiesField = ({abilities, abilityName}) => {
@@ -23,16 +21,15 @@ const AbilitiesField = ({abilities, abilityName}) => {
         </div>
     )
 };
+
 const getAbilityValue = (abilities, abilityName) => {
     return abilities[abilityName.toLowerCase()];
 };
+
 const mapStateToProps = (store) => {
     return {
         abilities: {...store.nextStep.abilities}
     }
 };
-const mapDispatchToProps = (dispatch) => {
-    return { actions: bindActionCreators(actionCreators, dispatch) }
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AbilitiesField);
+export default connect(mapStateToProps)(AbilitiesField);

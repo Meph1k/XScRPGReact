@@ -6,9 +6,10 @@ import "../../styles/attributes.scss";
 
 const ClassChoiceButton = (props) => {
     let cssClass = getProperActiveElement(props);
+    const onButtonClick = (props) => (event) => saveClass(props);
 
     return (
-        <button class={cssClass} onClick={() => saveClass(props)}>
+        <button class={cssClass} onClick={onButtonClick(props)}>
             <span class="attribute-choice-button__text">{props.classOfACharacter}</span>
         </button>
     );

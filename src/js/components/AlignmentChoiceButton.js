@@ -4,12 +4,14 @@ import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions/nextStepCharAction';
 import "../../styles/attributes.scss";
 
-const AlignmentChoiceButton = ({alignment, actions, lastStep}) => {
-    let cssClass = getProperActiveElement(alignment, lastStep);
+const AlignmentChoiceButton = (props) => {
+    let cssClass = getProperActiveElement(props.alignment, props.lastStep);
 
+    const onButtonClick = (alignment, actions) => (event) => saveAlignmentToStore(alignment, actions);
+    
     return (
-        <button class={cssClass} onClick={() => saveAlignmentToStore(alignment, actions)}>
-            <span class="attribute-choice-button__text">{alignment}</span>
+        <button class={cssClass} onClick={onButtonClick(props.alignment, props.actions)}>
+            <span class="attribute-choice-button__text">{props.alignment}</span>
         </button>
     );
 };
@@ -28,7 +30,7 @@ const getProperActiveElement = (alignment, lastStep) => {
 
 const mapStateToProps = (store) => {
     return {
-        abilities: {...store.nextStep.abilities},
+        abilities: store.nextStep.abilities,
         lastStep: store.nextStep
     }
 };

@@ -6,7 +6,7 @@ const EquipmentLowerPart = () => {
     return (
         <div class="container">
             <div class="row eq-lower-part-container">
-                {() => createEqLowerPart()}
+                {createEqLowerPart()}
             </div>
         </div>
     );

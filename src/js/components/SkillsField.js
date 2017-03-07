@@ -15,10 +15,10 @@ const SkillsField = (props) => {
                 {getSkillValue(props)}
             </div>
             <div class="col-sm-1">
-                <ChangeSkillLevel skillName={props.skillName} sign="+" />
+                <ChangeSkillLevel skillName={props.skillName} sign="+" skillNumber={props.skillNumber} />
             </div>
             <div class="col-sm-1">
-                <ChangeSkillLevel skillName={props.skillName} sign="-" />
+                <ChangeSkillLevel skillName={props.skillName} sign="-" skillNumber={props.skillNumber} />
             </div>
         </div>
     );
@@ -29,7 +29,6 @@ const getSkillValue = (props) => {
 };
 
 const mapStateToProps = (store) => {
-
     return {
         skills: {...store.nextStep.skills}
     }

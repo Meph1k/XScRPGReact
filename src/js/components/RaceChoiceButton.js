@@ -7,8 +7,10 @@ import "../../styles/attributes.scss";
 const RaceChoiceButton = (props) => {
     let cssClass = getProperActiveElement(props);
 
+    const onButtonClick = (props) => (event) => saveRace(props);
+
     return (
-        <button class={cssClass} onClick={() => saveRace(props)}>
+        <button class={cssClass} onClick={onButtonClick(props)}>
             <span class="attribute-choice-button__text">{props.race}</span>
         </button>
     );

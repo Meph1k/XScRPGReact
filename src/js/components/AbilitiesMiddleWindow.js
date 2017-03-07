@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import AbilitiesField from './AbilitiesField';
-import {abilitiesChoiceTitles} from '../constants/AttributeChoiceTitles';
+import { abilitiesChoiceTitles } from '../constants/AttributeChoiceTitles';
 import { connect } from "react-redux"
+import "../../styles/attributes.scss";
 
-require("../../styles/attributes.scss");
+const AbilitiesMiddleWindow = () => {
+    return (
+        <div class="all-attrs-window">{createAttrsWindow()}</div>
+    );
+};
 
-@connect((store) => {
+const createAttrsWindow = () => {
+    return abilitiesChoiceTitles.map((i, index) => <div key={i}><AbilitiesField abilityName={i} /></div>)
+};
+
+const mapStateToProps = (store) => {
     return {
         abilities: store.nextStep.abilities
     };
-})
-export default class AbilitiesMiddleWindow extends Component {
-    createAttrsWindow() {
-        return abilitiesChoiceTitles.map((i, index) => <div key={i}><AbilitiesField abilityName={i} /></div>)
-    }
+};
 
-    render() {
-        return (
-            <div class="all-attrs-window">{this.createAttrsWindow()}</div>
-        );
-    }
-}
+export default connect(mapStateToProps)(AbilitiesMiddleWindow);

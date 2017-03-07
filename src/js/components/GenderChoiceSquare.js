@@ -1,30 +1,50 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux"
-import { saveGender } from '../actions/nextStepCharAction';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from '../actions/nextStepCharAction';
+import "../../styles/attributes.scss";
 
-require("../../styles/attributes.scss");
+const GenderChoiceSquare = (props) => {
+    let cssClass = getProperActiveElement(props);
+    const onButtonClick = (props) => (event) => chooseSex(props);
+    
+    return (
+        <div class={cssClass}
+             onClick={onButtonClick(props)}>{getProperSymbol(props.sex)}
+        </div>
+    );
+};
 
-@connect((store) => {
+const getProperSymbol = (sex) => {
+    if ('female' === sex) {
+        return '♀';
+    }
+
+    return '♂';
+};
+
+const getProperActiveElement = (props) => {
+    if (props.sex === props.lastStep.gender) {
+        return 'col-sm-5 col-sm-offset-1 gender-choice-square active-element';
+    }
+
+    return 'col-sm-5 col-sm-offset-1 gender-choice-square';
+};
+
+const chooseSex = (props) => {
+    props.actions.saveGender(props.sex);
+
+    return getProperActiveElement(props);
+};
+
+const mapStateToProps = (store) => {
     return {
         lastStep: store.nextStep
     };
-})
-export default class GenderChoiceSquare extends Component {
-    getProperSymbol() {
-        if ('female' === this.props.sex) {
-            return '♀';
-        }
-        return '♂';
-    }
-    
-    chooseSex() {
-        return this.props.dispatch(saveGender(this.props.sex));
-    }
+};
 
-    render() {
-        return (
-            <div class="col-sm-5 col-sm-offset-1 gender-choice-square"
-                 onClick={this.chooseSex.bind(this)}>{this.getProperSymbol()}</div>
-        );
-    }
-}
+const mapDispatchToProps = (dispatch) => {
+    return { actions: bindActionCreators(actionCreators, dispatch) }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(GenderChoiceSquare);

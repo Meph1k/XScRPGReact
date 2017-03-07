@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import {classChoiceTitles} from '../constants/AttributeChoiceTitles';
+import { classChoiceTitles } from '../constants/AttributeChoiceTitles';
 import ClassChoiceButton from './ClassChoiceButton';
 import { connect } from "react-redux"
+import "../../styles/attributes.scss";
 
-require("../../styles/attributes.scss");
+const ClassChoiceWindow = () => {
+    return (
+        <div class="col-sm-6"><div class="all-attrs-window">{createAttrsWindow()}</div></div>
+    );
+};
 
-export default class ClassChoiceWindow extends Component {
-    createAttrsWindow() {
-        return classChoiceTitles.map((i, index) => <div key={index}><ClassChoiceButton classOfACharacter={i} /></div>)
-    }
+const createAttrsWindow = () => {
+    return classChoiceTitles.map((i, index) => <div key={index}><ClassChoiceButton classOfACharacter={i} /></div>)
+};
 
-    render() {
-        return (
-            <div class="col-sm-6"><div class="all-attrs-window">{this.createAttrsWindow()}</div></div>
-        );
-    }
-}
+export default connect()(ClassChoiceWindow);

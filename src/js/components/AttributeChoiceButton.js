@@ -1,32 +1,37 @@
 import React, { Component } from 'react';
-import { saveLastStep } from '../actions/nextStepCharAction';
-import { connect } from "react-redux"
+import { bindActionCreators } from 'redux';
+import * as actionCreators from '../actions/nextStepCharAction';
+import { connect } from "react-redux";
+import "../../styles/attributes.scss";
 
-require("../../styles/attributes.scss");
+const AttributeChoiceButton = ({actions, lastStep, step, buttonTitle}) => {
+    const onButtonClick = (step, actions) => (event) => saveLastStep(actions, step);
+    
+    return (
+        <div>
+            {lastStep !== step ? (
+                <button class="attribute-choice-button" disabled>
+                    <span class="attribute-choice-button__text">{buttonTitle}</span>
+                </button>) :
+                <button class="attribute-choice-button" onClick={onButtonClick(step, actions)}>
+                    <span class="attribute-choice-button__text">{buttonTitle}</span>
+                </button>}
+        </div>
+    )
+};
 
-@connect((store) => {
+const saveLastStep = (actions, step) => {
+    return actions.saveLastStep(step + 1);
+};
+
+const mapStateToProps = (store) => {
     return {
         lastStep: store.nextStep.lastStep
-    };
-})
-export default class AttributeChoiceButton extends Component {
-
-    saveLastStep() {
-        return this.props.dispatch(saveLastStep(this.props.step + 1));
     }
+};
 
-    render() {
-        if (this.props.lastStep !== this.props.step) {
-            return (
-                <button class="attribute-choice-button" disabled>
-                    <span class="attribute-choice-button__text">{this.props.buttonTitle}</span>
-                </button>
-            );
-        }
-        return (
-            <button class="attribute-choice-button" onClick={this.saveLastStep.bind(this)}>
-                <span class="attribute-choice-button__text">{this.props.buttonTitle}</span>
-            </button>
-        );
-    }
-}
+const mapDispatchToProps = (dispatch) => {
+    return { actions: bindActionCreators(actionCreators, dispatch) }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AttributeChoiceButton);

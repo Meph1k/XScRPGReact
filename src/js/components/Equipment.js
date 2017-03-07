@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import EquipmentUpperPart from './EquipmentUpperPart';
 import EquipmentLowerPart from './EquipmentLowerPart';
+import { connect } from "react-redux"
 
-export default class Equipment extends Component {
+const Equipment = () => {
+    return (
+        <div class="equipment-layout">
+            <EquipmentUpperPart />
+            <EquipmentLowerPart />
+        </div>
+    );
+};
 
-    render() {
-        return (
-            <div class="equipment-layout">
-                <EquipmentUpperPart />
-                <EquipmentLowerPart />
-            </div>
-        );
-    }
-}
+export default connect()(Equipment);

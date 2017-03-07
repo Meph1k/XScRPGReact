@@ -6,6 +6,7 @@ import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 
 import Equipment from "./components/Equipment";
 import CharacterCreation from "./components/CharacterCreation";
+import CharacterSummary from "./components/CharacterSummary";
 import Layout from "./components/Layout";
 import store from "./store";
 
@@ -15,6 +16,7 @@ ReactDOM.render(<Provider store={store}>
     <Route path="/" component={Layout}>
       <Route path="equipment" name="equipment" component={Equipment} />
       <Route path="character-creation" name="characterCreation" component={CharacterCreation} />
+      <Route path="character-summary" name="characterSummary" component={CharacterSummary} />
     </Route>
   </Router>
 </Provider>, app);

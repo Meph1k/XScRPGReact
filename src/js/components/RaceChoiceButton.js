@@ -1,19 +1,41 @@
 import React, { Component } from 'react';
-import { saveRace } from '../actions/nextStepCharAction';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from '../actions/nextStepCharAction';
 import { connect } from "react-redux"
+import "../../styles/attributes.scss";
 
-require("../../styles/attributes.scss");
+const RaceChoiceButton = (props) => {
+    let cssClass = getProperActiveElement(props);
 
-export default class RaceChoiceButton extends Component {
-    saveRace() {
-        return this.props.dispatch(saveRace(this.props.race));
+    const onButtonClick = (props) => (event) => saveRace(props);
+
+    return (
+        <button class={cssClass} onClick={onButtonClick(props)}>
+            <span class="attribute-choice-button__text">{props.race}</span>
+        </button>
+    );
+};
+
+const saveRace = (props) => {
+    return props.actions.saveRace(props.race);
+};
+
+const getProperActiveElement = (props) => {
+    if (props.race === props.lastStep.race) {
+        return 'attribute-choice-button active-element';
     }
 
-    render() {
-        return (
-            <button class="attribute-choice-button" onClick={this.saveRace.bind(this)}>
-                <span class="attribute-choice-button__text">{this.props.race}</span>
-            </button>
-        );
-    }
-}
+    return 'attribute-choice-button';
+};
+
+const mapStateToProps = (store) => {
+    return {
+        lastStep: store.nextStep
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return { actions: bindActionCreators(actionCreators, dispatch) }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RaceChoiceButton);
